@@ -58,7 +58,7 @@ function handle_password_reset_request($mysqli, $email) {
                     $stmt_insert->bind_param("sss", $email, $token, $expires);
                     if ($stmt_insert->execute()) {
                         send_reset_email($email, $token);
-                        header("location: reset_pass_confirmation.php");
+                        include 'templates/reset_pass_confirmation_template.php';
                         exit;
                     } else {
                         echo "Something went wrong. Please try again later.";
