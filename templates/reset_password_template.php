@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <?php include 'templates/header.php'; ?>
+    <?php
+        require_once 'includes/functions.php';
+        render_template("header");
+    ?>
 
     <main>
         <div class="auth-container">

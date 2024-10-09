@@ -13,6 +13,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once 'includes/db_config.php';
+require_once 'includes/login_functions.php';
+require_once 'includes/validation_functions.php';
 require_once 'includes/functions.php';
 
 $email = $password = "";
@@ -20,19 +22,9 @@ $email_err = $password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $email_input = $_POST["email"] ?? '';
-    if (empty(trim($email_input))) {
-        $email_err = "Please enter email.";
-    } else {
-        $email = trim($email_input);
-    }
-
-    $password_input = $_POST["password"] ?? '';
-    if (empty(trim($password_input))) {
-        $password_err = "Please enter your password.";
-    } else {
-        $password = trim($password_input);
-    }
+    // Validate email and password
+    $email = validate_email_login();
+    $password = validate_password();
 
     if (empty($email_err) && empty($password_err)) {
         $result = login_user($mysqli, $email, $password);
@@ -43,5 +35,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mysqli->close();
 }
 
-include 'templates/login_template.php';
+render_template("login_template");
 ?>

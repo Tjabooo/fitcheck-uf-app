@@ -343,6 +343,7 @@ nav button span {
     margin-top: 5px;
     line-height: 1.4;
     position: static;
+    text-align: center;
 }
 
 .auth-container button[type="submit"] {
@@ -407,6 +408,19 @@ nav button span {
     height: 32px;
 }
 
+.error-message, .success-message {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
 .error-message {
     color: #e74c3c;
+}
+
+.success-message {
+    color: #4F8A10;
 }

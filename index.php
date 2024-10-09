@@ -1,6 +1,8 @@
 <?php
 require_once 'includes/auth_check.php';
-include 'templates/header.php';
+require_once 'includes/functions.php';
+
+render_template("header");
 ?>
 
 <head>
@@ -12,11 +14,11 @@ include 'templates/header.php';
 </head>
 
 <main id="content">
-    <!-- content -->
+    <!-- Dynamic content handled by main.js -->
 </main>
 
 <?php
-include 'templates/nav.php';
+render_template("nav");
 ?>
 
 <script src="assets/js/main.js"></script>

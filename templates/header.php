@@ -2,8 +2,8 @@
     <div class="header">
         <?php if (basename($_SERVER['PHP_SELF']) == 'register.php' or basename($_SERVER['PHP_SELF']) == 'request_pass_reset.php'): ?>
             <div class="header-left">
-                <button class="back-button" onclick="history.back();">
-                    <img src="assets/back-icon.png" alt="Back Icon">
+                <button class="main-button-design" onclick=location.href="login.php">
+                    Back to Login
                 </button>
             </div>
         <?php endif; ?>

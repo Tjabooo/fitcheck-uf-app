@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <?php include 'templates/header.php'; ?>
-
+    <?php
+        require_once 'includes/functions.php';
+        render_template("header");
+    ?>
     <main>
         <div class="auth-container">
             <h2>Registration Successful!</h2>
             <p>We've sent a verification email to your email address. Please check your inbox and click on the verification link to activate your account.</p>
+
+            <!-- Handle resending verification email -->
             <form action="register.php" method="post">
                 <input type="hidden" name="resend_verification" value="1">
                 <div class="form-group">
@@ -23,6 +27,8 @@
             <?php if (!$can_resend): ?>
                 <p>Please wait <span id="countdown"><?php echo intval($remaining_time); ?></span> seconds before resending.</p>
             <?php endif; ?>
+
+            <!-- Display error or success messages -->
             <?php
             if (!empty($email_err)) {
                 echo '<div class="error-message">' . htmlspecialchars($email_err) . '</div>';
@@ -35,6 +41,7 @@
     </main>
 
     <script>
+        // 60 second timer between resending verification emails
         let remainingTime = <?php echo intval($remaining_time); ?>;
         const resendButton = document.getElementById('resend-button');
         const countdownSpan = document.getElementById('countdown');
