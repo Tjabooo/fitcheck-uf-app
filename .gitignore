@@ -1,5 +1,2 @@
-assets/*
-!assets/css/
-!assets/js/
 includes/db_config.php
 .htaccess
