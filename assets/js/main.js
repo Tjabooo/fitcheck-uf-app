@@ -25,6 +25,7 @@ function loadPage(page) {
                     break;
                 case 'settings':
                     setupSettingsPage();
+                    break;
                 default:
                     break;
             }
@@ -176,9 +177,15 @@ function setupProfilePage() {
                 });
         }
     });
+
+    document.getElementById('settings-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        loadPage('settings');
+    });
 }
 
 function setupSettingsPage() {
+    console.log("Settings page loaded");
     const deleteButton = document.getElementById('delete-account-button');
     const deleteStatus = document.getElementById('delete-status');
     const deleteError = document.getElementById('delete-error');
