@@ -1,19 +1,27 @@
 <section class="screen profile-screen">
     <h2>Your Profile</h2>
     <div class="profile-info">
-        <img id="profile-picture" src="assets/profile-pictures/default.png" alt="Profile Picture" class="profile-picture" />
-        <p><strong>Username:</strong> <span id="username">Loading...</span></p>
-        <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-    </div>
-    <div class="profile-actions">
-        <h3>Change Profile Picture</h3>
-        <form id="profile-picture-form" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="file" id="profile-picture-input" name="profile_picture" accept="image/*" required />
-            </div>
-            <button type="submit" class="main-button-design">Upload</button>
-        </form>
+        <div class="profile-picture-container">
+            <img id="profile-picture" src="assets/profile-pictures/default.png" alt="Profile Picture" class="profile-picture" />
+            <button id="edit-profile-picture" class="edit-icon" title="Edit Profile Picture">
+                <img src="assets/edit-icon.png" alt="Edit" />
+            </button>
+        </div>
+        <button id="apply-profile-picture" class="apply-button" style="display: none;">Apply</button>
         <div id="upload-status" class="success-message" style="display: none;"></div>
         <div id="upload-error" class="error-message" style="display: none;"></div>
+        <p id="username">Loading...</p>
+        <p id="email">Loading...></p>
+    </div>
+    <br>
+    <h2>
+        Notice! This is a prototype. The website is not yet functional. Please excuse any bugs.
+    </h2>
+    <br>
+    <h2>
+        If you have any questions, contact us at contact@fitcheck.nu
+    </h2>
+    <div class="profile-actions" style="display:none;">
+        <input type="file" id="profile-picture-input" name="profile_picture" accept="image/*" style="display:none;" />
     </div>
 </section>

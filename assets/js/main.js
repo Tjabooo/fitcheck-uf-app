@@ -99,14 +99,13 @@ function setupGeneratePage() {
 
 function setupProfilePage() {
     // Fetch and display user profile information
-
     fetch('../../includes/get_profile_data.php')
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 document.getElementById('username').textContent = data.username;
                 document.getElementById('email').textContent = data.email;
-                
+
                 // Set profile picture
                 if (data.profile_picture) {
                     document.getElementById('profile-picture').src = data.profile_picture + `?t=${new Date().getTime()}`; // Prevent caching
@@ -122,46 +121,60 @@ function setupProfilePage() {
             alert('Failed to load profile information.');
         });
 
-    // Handle profile picture upload
-    const profileForm = document.getElementById('profile-picture-form');
-    profileForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(profileForm);
-        const uploadStatus = document.getElementById('upload-status');
-        const uploadError = document.getElementById('upload-error');
+    // Handle profile picture edit icon click
+    const editButton = document.getElementById('edit-profile-picture');
+    const fileInput = document.getElementById('profile-picture-input');
+    const applyButton = document.getElementById('apply-profile-picture');
+    let selectedFile = null;
 
-        // Reset messages
-        uploadStatus.style.display = 'none';
-        uploadError.style.display = 'none';
-
-        fetch('../../includes/upload_profile_picture.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const profilePicElement = document.getElementById('profile-picture');
-                    const newProfilePicturePath = `${data.profile_picture}?t=${new Date().getTime()}`;  // Ensure cache busting
-                    profilePicElement.src = newProfilePicturePath;
-                    uploadStatus.textContent = 'Profile picture updated successfully.';
-                    uploadStatus.style.display = 'block';
-                } else {
-                    uploadError.textContent = `Error: ${data.error}`;
-                    uploadError.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                console.error('Error uploading profile picture:', error);
-                uploadError.textContent = 'An error occurred while uploading the profile picture.';
-                uploadError.style.display = 'block';
-            });
+    editButton.addEventListener('click', () => {
+        fileInput.click();
     });
 
-    // Handle settings link
-    document.getElementById('settings-link').addEventListener('click', function(event) {
-        event.preventDefault();
-        loadPage('settings');
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            selectedFile = file;
+            // Show preview of selected image
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('profile-picture').src = e.target.result;
+                applyButton.style.display = 'block'; // Show apply button
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Handle apply profile picture click
+    applyButton.addEventListener('click', () => {
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append('profile_picture', selectedFile);
+
+            fetch('../../includes/upload_profile_picture.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const profilePicElement = document.getElementById('profile-picture');
+                        const newProfilePicturePath = `${data.profile_picture}?t=${new Date().getTime()}`;  // Ensure cache busting
+                        profilePicElement.src = newProfilePicturePath;
+                        applyButton.style.display = 'none'; // Hide apply button
+                        document.getElementById('upload-status').textContent = 'Profile picture updated successfully.';
+                        document.getElementById('upload-status').style.display = 'block';
+                    } else {
+                        document.getElementById('upload-error').textContent = `Error: ${data.error}`;
+                        document.getElementById('upload-error').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error uploading profile picture:', error);
+                    document.getElementById('upload-error').textContent = 'An error occurred while uploading the profile picture.';
+                    document.getElementById('upload-error').style.display = 'block';
+                });
+        }
     });
 }
 

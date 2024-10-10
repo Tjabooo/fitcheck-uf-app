@@ -4,11 +4,11 @@
         <span>Closet</span>
     </button>
     <button data-target="generate">
-        <img src="assets/generate-icon.png" alt="Generate Icon">
+        <img src="assets/dressing-room-icon.png" alt="Generate Icon">
         <span>Dressing Room</span>
     </button>
     <button data-target="profile">
-        <img src="assets/profile-icon.png" alt="Profile Icon">
+        <img src="assets/mirror-icon.png" alt="Profile Icon">
         <span>Mirror</span>
     </button>
 </nav>
