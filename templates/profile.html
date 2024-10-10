@@ -1,9 +1,19 @@
 <section class="screen profile-screen">
-    <a href="logout.php">Logout</a>
-    <p>Your profile information will appear here.</p>
-    <br><br><br><br>
-    <h1>NOTICE! This website has no functionality.
-    Everything is currently being tested so there is nothing to do here.
-    <br><br>
-    If you have any feedback, please let us know at contact@fitcheck.nu</h1>
+    <h2>Your Profile</h2>
+    <div class="profile-info">
+        <img id="profile-picture" src="assets/profile-pictures/default.png" alt="Profile Picture" class="profile-picture" />
+        <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+    </div>
+    <div class="profile-actions">
+        <h3>Change Profile Picture</h3>
+        <form id="profile-picture-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" id="profile-picture-input" name="profile_picture" accept="image/*" required />
+            </div>
+            <button type="submit" class="main-button-design">Upload</button>
+        </form>
+        <div id="upload-status" class="success-message" style="display: none;"></div>
+        <div id="upload-error" class="error-message" style="display: none;"></div>
+    </div>
 </section>

@@ -20,7 +20,7 @@ function send_verification_email($email, $token) {
 
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8\r\n";
-    $headers .= 'From: FitCheck UF Support <noreply@fitcheck.nu>' . "\r\n";
+    $headers .= 'From: FitCheck UF <noreply@fitcheck.nu>' . "\r\n";
 
     // Send email
     mail($email, $subject, $message, $headers);

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once 'includes/db_config.php';
 require_once 'includes/verification_functions.php';
@@ -17,4 +18,5 @@ if (empty($token)) {
 $mysqli->close();
 
 render_template("verify_email_template");
+
 ?>

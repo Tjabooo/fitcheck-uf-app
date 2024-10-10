@@ -15,7 +15,7 @@
     <main>
         <div class="auth-container">
             <h2>Registration Successful!</h2>
-            <p>We've sent a verification email to your email address. Please check your inbox and click on the verification link to activate your account.</p>
+            <p>We've sent a verification email to your email address. Please check your inbox. Head to the <a href="login.php">login</a> page once you're done.</p>
 
             <!-- Handle resending verification email -->
             <form action="register.php" method="post">

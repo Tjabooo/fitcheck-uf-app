@@ -21,7 +21,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 
 if (!isset($_SESSION["username"])) {
-    logout_user();
+    header("location: logout.php");
+    exit;
 }
 
 $username = $_SESSION["username"];
@@ -35,12 +36,14 @@ if ($stmt = $mysqli->prepare($sql)) {
     
     if ($stmt->num_rows !== 1) {
         $stmt->close();
-        logout_user();
+        header("location: logout.php");
+        exit;
     }
     
     $stmt->close();
 } else {
-    logout_user();
+    header("location: logout.php");
+    exit;
 }
 
 ?>

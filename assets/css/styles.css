@@ -30,8 +30,8 @@ header {
 
 .header-left {
     position: absolute;
-    transform: translateY(-50%);
-    margin-left: 10px;
+    top: 20pxz;
+    left: 20px;
 }
 
 .header-center {
@@ -394,6 +394,15 @@ nav button span {
     header, .header-center {
         padding: 5px;
     }
+
+    .profile-screen {
+        margin: 5px;
+        padding: 15px;
+    }
+    
+    .profile-actions h3 {
+        font-size: 18px;
+    }
 }
 
 .back-button {
@@ -423,4 +432,49 @@ nav button span {
 
 .success-message {
     color: #4F8A10;
+}
+
+.header-right {
+    position: absolute;
+    right: 20px;
+}
+
+.header-right img {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+}
+
+#profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-actions {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.profile-actions h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.profile-actions form {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.profile-screen {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#upload-error.error-message {
+    margin-top: 0;
 }

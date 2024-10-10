@@ -9,9 +9,6 @@ session_set_cookie_params([
 ]);
 session_start();
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 require_once 'includes/db_config.php';
 require_once 'includes/login_functions.php';
 require_once 'includes/validation_functions.php';

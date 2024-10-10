@@ -5,10 +5,10 @@
     </button>
     <button data-target="generate">
         <img src="assets/generate-icon.png" alt="Generate Icon">
-        <span>Generate</span>
+        <span>Dressing Room</span>
     </button>
     <button data-target="profile">
         <img src="assets/profile-icon.png" alt="Profile Icon">
-        <span>Profile</span>
+        <span>Mirror</span>
     </button>
 </nav>
