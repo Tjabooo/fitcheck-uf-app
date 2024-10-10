@@ -6,6 +6,8 @@ require_once 'includes/registration_functions.php';
 require_once 'includes/verification_functions.php';
 require_once 'includes/functions.php';
 
+blockDesktopAccess();
+
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $max_attempts = 5;
 $attempt_window = 3600;

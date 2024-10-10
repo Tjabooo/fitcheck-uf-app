@@ -15,6 +15,8 @@ require_once 'includes/login_functions.php';
 require_once 'includes/validation_functions.php';
 require_once 'includes/functions.php';
 
+blockDesktopAccess();
+
 $email = $password = "";
 $email_err = $password_err = "";
 

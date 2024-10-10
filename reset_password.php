@@ -4,6 +4,8 @@ require_once 'includes/db_config.php';
 require_once 'includes/pass_reset_functions.php';
 require_once 'includes/functions.php';
 
+blockDesktopAccess();
+
 $token = $_GET['token'] ?? '';
 $email = $_GET['email'] ?? '';
 $invalid_request_err = "";

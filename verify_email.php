@@ -5,6 +5,8 @@ require_once 'includes/db_config.php';
 require_once 'includes/verification_functions.php';
 require_once 'includes/functions.php';
 
+blockDesktopAccess();
+
 $token = $_GET['token'] ?? '';
 $verification_err = "";
 

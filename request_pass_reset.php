@@ -4,6 +4,8 @@ require_once 'includes/db_config.php';
 require_once 'includes/pass_reset_functions.php';
 require_once 'includes/functions.php';
 
+blockDesktopAccess();
+
 $email = $email_err = "";
 
 // Handle POST request
