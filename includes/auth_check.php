@@ -1,6 +1,7 @@
 <?php
+// auth_check.php
 
-// Start cookie session
+// Start session with cookie parameters
 session_set_cookie_params([
     'lifetime' => 86400 * 30,
     'path' => '/',
@@ -11,10 +12,35 @@ session_set_cookie_params([
 ]);
 session_start();
 
-// Redirect user to login.php (templates/login_template.php) if user is not logged in
+require_once 'db_config.php';
+require_once 'functions.php';
+
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
+}
+
+if (!isset($_SESSION["username"])) {
+    logout_user();
+}
+
+$username = $_SESSION["username"];
+
+$sql = "SELECT id FROM users WHERE username = ? LIMIT 1";
+
+if ($stmt = $mysqli->prepare($sql)) {
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    if ($stmt->num_rows !== 1) {
+        $stmt->close();
+        logout_user();
+    }
+    
+    $stmt->close();
+} else {
+    logout_user();
 }
 
 ?>
