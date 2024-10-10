@@ -7,15 +7,13 @@ error_reporting(E_ALL);
 require_once 'auth_check.php';
 require_once 'db_config.php';
 
-// Initialize response
 $response = [
     'success' => false,
     'username' => '',
     'email' => '',
-    'profile_picture' => 'assets/profile-pictures/default.png' // Default picture
+    'profile_picture' => 'assets/profile-pictures/default.png'
 ];
 
-// Check if the user is logged in
 if (!isset($_SESSION['username'])) {
     $response['message'] = 'User not logged in.';
     echo json_encode($response);
@@ -24,7 +22,6 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Fetch user data from the database
 $sql = "SELECT email FROM users WHERE username = ?";
 if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_param("s", $username);
@@ -35,26 +32,31 @@ if ($stmt = $mysqli->prepare($sql)) {
 
         $allowed_extensions = ['jpg', 'jpeg', 'png'];
 
-        // Iterate through allowed extensions to find the profile picture
+        $profile_pictures_dir = __DIR__ . '/../assets/profile-pictures/';
+
         foreach ($allowed_extensions as $ext) {
-            $filename = "{$username}.$ext";
+            $filename = "{$username}." . strtolower($ext);
+            $absolute_path = $profile_pictures_dir . $filename;
             $relative_path = "assets/profile-pictures/{$filename}";
-            if (file_exists($relative_path)) {
+            if (file_exists($absolute_path)) {
                 $response['profile_picture'] = $relative_path;
                 break;
             }
         }
+    } else {
+        $stmt->close();
+        $response['message'] = 'User not found.';
+        echo json_encode($response);
+        exit;
     }
-    
+
     $response['success'] = true;
     $response['username'] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
     $response['email'] = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 } else {
-        $stmt->close();
-        $response['message'] = 'User not found.';
-    }
+    $response['message'] = 'Database query failed.';
+}
 
-// Output JSON response
 echo json_encode($response);
 
 ?>

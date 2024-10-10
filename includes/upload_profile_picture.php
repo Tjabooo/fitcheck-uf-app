@@ -43,7 +43,7 @@ if (!in_array($mime_type, $allowed_types)) {
     exit;
 }
 
-$max_size = 2 * 1024 * 1024; // 5MB
+$max_size = 2 * 1024 * 1024; // 2MB
 if ($file['size'] > $max_size) {
     echo json_encode(['success' => false, 'error' => 'File size exceeds 2MB.']);
     exit;
@@ -53,7 +53,7 @@ if ($file['size'] > $max_size) {
 $extension = '';
 switch ($mime_type) {
     case 'image/jpeg':
-        $extension = 'jpg';
+        $extension = 'jpeg';
         break;
     case 'image/png':
         $extension = 'png';
@@ -62,7 +62,7 @@ switch ($mime_type) {
         $extension = 'jpg';
 }
 
-$target_directory = 'assets/profile-pictures/';
+$target_directory = __DIR__ . '/../assets/profile-pictures/';
 $target_file = $target_directory . $username . '.' . $extension;
 
 // Remove existing profile pictures with different extensions
