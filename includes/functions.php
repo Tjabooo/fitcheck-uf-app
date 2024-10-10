@@ -8,4 +8,9 @@ function render_template($template) {
     include 'templates/' . $template . '.php';
 }
 
+// Check if the user is on a mobile device
+function isMobile() {
+    return preg_match('/Mobi|Android|iPhone|iPad/i', $_SERVER['HTTP_USER_AGENT']);
+}
+
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 session_set_cookie_params([
     'lifetime' => 86400 * 30,
     'path' => '/',
@@ -33,4 +34,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 render_template("login_template");
+
 ?>
