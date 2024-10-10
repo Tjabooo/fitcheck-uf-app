@@ -106,7 +106,7 @@ nav button span {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: calc(100% - 196px);
+    height: 100%;
 }
 
 .add-new-clothes-container {
@@ -399,6 +399,10 @@ nav button span {
     .profile-screen {
         margin: 5px;
         padding: 15px;
+    }
+
+    .closet-screen {
+        height: calc(100% - 196px);
     }
 }
 
