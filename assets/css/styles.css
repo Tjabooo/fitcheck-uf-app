@@ -31,7 +31,7 @@ header {
 
 .header-left {
     position: absolute;
-    top: 20pxz;
+    top: 25px;
     left: 20px;
 }
 
@@ -378,20 +378,6 @@ nav button span {
 }
 
 @media (max-width: 600px) {
-    .auth-container {
-        max-width: 90%;
-        margin: 20px auto;
-        padding: 10px;
-    }
-
-    .auth-container h2 {
-        font-size: 24px;
-    }
-
-    .auth-container form {
-        padding: 0;
-    }
-
     header, .header-center {
         padding: 5px;
     }
