@@ -49,12 +49,12 @@ try {
     $mysqli->commit();
 
     // Delete profile picture
-    $upload_dir = 'assets/profile-pictures/';
+    $upload_dir = '../assets/profile-pictures/';
     $allowed_extensions = ['jpg', 'jpeg', 'png'];
     foreach ($allowed_extensions as $ext) {
         $file_path = $upload_dir . $username . '.' . $ext;
-        unlink($file_path);        
-    }    
+        unlink($file_path);
+    }
 
     // Destroy session
     session_unset();
