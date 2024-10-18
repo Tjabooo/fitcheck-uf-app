@@ -1,0 +1,9 @@
+<FilesMatch "db_config.php">
+    Require all deny
+</FilesMatch>
+
+<FilesMatch ".env">
+    Require all deny
+</FilesMatch>
+
+php_flag display_errors On
