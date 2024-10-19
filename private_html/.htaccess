@@ -1,0 +1,9 @@
+<Files "db_config.php">
+    Require all denied
+</Files>
+
+<Files "assets/profile-pictures/*">
+    Require all denied
+</Files>
+
+php_flag display_errors 1
