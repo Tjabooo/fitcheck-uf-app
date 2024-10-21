@@ -15,10 +15,14 @@ class BlockDesktopAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $blockDesktopAccess = 0; // 1 = allow desktop access, 0 = block desktop access
+        $blockDesktopAccess = 1; // 1 = block desktop access, 0 = allow desktop access
 
-        if (!preg_match('/Mobi|Android|iPhone|iPad/i', $_SERVER['HTTP_USER_AGENT']) && $blockDesktopAccess) {
-            return response(view('auth.errors.desktop'));
+        if (
+            !preg_match('/Mobi|Android|iPhone|iPad/i', $_SERVER['HTTP_USER_AGENT']) &&
+            $blockDesktopAccess &&
+            !$request->is('desktop')
+        ) {
+            return response(redirect()->route('errors.desktop'));
         }
 
         return $next($request);

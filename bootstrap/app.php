@@ -12,7 +12,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->append(BlockDesktopAccess::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

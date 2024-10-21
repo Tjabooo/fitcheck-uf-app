@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
-use App\Http\Middleware\BlockDesktopAccess;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +33,12 @@ Route::get('/password/reset/{token}', [PasswordResetController::class, 'showRese
 Route::get('/invalid_token', function () {
     return view('auth.errors.invalid_token');
 })->name('errors.invalid_token');
+Route::get('/desktop', function () {
+    return view('auth.errors.desktop');
+})->name('errors.desktop');
 
 // Protected Routes
-Route::middleware(['auth', BlockDesktopAccess::class])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
