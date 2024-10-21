@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
-use Illuminate\Support\Str;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class PasswordResetController extends Controller
 {
     // Show request form
     public function showRequestForm()
     {
-        return view('auth.email');
+        return view('auth.passwords.email');
     }
 
     // Handle reset link request
@@ -27,7 +27,8 @@ class PasswordResetController extends Controller
         $user = User::where('email', $email)->first();
 
         if (!$user) {
-            return view('auth.reset-password-confirmation');
+            // Do not reveal that the email does not exist
+            return view('auth.passwords.confirmation');
         }
 
         // Generate token
@@ -47,13 +48,13 @@ class PasswordResetController extends Controller
         // Send email
         $this->sendResetEmail($email, $token);
 
-        return view('auth.reset-password-confirmation');
+        return view('auth.passwords.confirmation');
     }
 
     // Send reset email
     protected function sendResetEmail($email, $token)
     {
-        $resetLink = route('reset-password', ['token' => $token, 'email' => urlencode($email)]);
+        $resetLink = route('password.reset', ['token' => $token, 'email' => urlencode($email)]);
 
         Mail::send('emails.reset_password', ['resetLink' => $resetLink], function ($message) use ($email) {
             $message->to($email)
@@ -74,7 +75,7 @@ class PasswordResetController extends Controller
             ->first();
 
         if (!$tokenData || Carbon::parse($tokenData->expires)->isPast()) {
-            return view('auth.reset-password');
+            return view('auth.passwords.reset');
         }
 
         return view('auth.passwords.reset', compact('token', 'email'));
