@@ -15,7 +15,7 @@ class BlockDesktopAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $blockDesktopAccess = 1; // 1 = block desktop access, 0 = allow desktop access
+        $blockDesktopAccess = 0; // 1 = block desktop access, 0 = allow desktop access
 
         if (
             !preg_match('/Mobi|Android|iPhone|iPad/i', $_SERVER['HTTP_USER_AGENT']) &&
