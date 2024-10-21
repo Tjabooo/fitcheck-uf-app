@@ -26,9 +26,9 @@ Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])
 
 // Password Reset Routes
 Route::get('/password/reset', [PasswordResetController::class, 'showRequestForm'])->middleware('guest')->name('password.request');
+Route::post('/password/reset', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
 Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
 Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->middleware('guest')->name('password.reset');
-Route::post('/password/reset', [PasswordResetController::class, 'reset'])->middleware('guest')->name('password.update');
 
 // Protected Routes
 Route::middleware(['auth', BlockDesktopAccess::class])->group(function () {

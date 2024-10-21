@@ -5,8 +5,14 @@
 @section('content')
 <div class="auth-container">
     <h2>Register</h2>
-    @if ($errors->has('rate_limit'))
-        <div class="error-message">{{ $errors->first('rate_limit') }}</div>
+    @if ($errors->any())
+        <div class="error-message">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
     <form action="{{ route('register') }}" method="post">
         @csrf
