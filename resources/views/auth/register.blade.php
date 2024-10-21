@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="auth-container">
-    <h2>Register</h2>
+    <h2>Registrera</h2>
     <form action="{{ route('register') }}" method="post">
         @csrf
         <div class="form-group @error('username') has-error @enderror">
