@@ -2,7 +2,7 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Invalid token</title>
+        <title>Ogiltig token</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Outfit" rel="stylesheet">
         <style>
@@ -17,7 +17,7 @@
         </style>
     </head>
     <body>
-        <h1>Invalid or expired token</h1>
-        <p>Go back to <a href='{{ url('/login') }}'>login</a>.</p>
+        <h1>Ogiltig eller utgånget token</h1>
+        <p>Gå tillbaks till <a href='{{ url('/login') }}'>inloggning</a>.</p>
     </body>
 </html>

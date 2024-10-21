@@ -1,25 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Registration Confirmation - FitCheck UF')
+@section('title', 'Registreringsbekräftelse - FitCheck UF')
 
 @section('content')
 <div class="auth-container">
-    <h2>Registration Successful!</h2>
-    <p>We've sent a verification email to your email address. Please check your inbox. Head to the <a href="{{ route('login') }}">login</a> page once you're done.</p>
+    <h2>Registrering lyckad!</h2>
+    <p>Vi har skickat ett verifieringsmail till din e-postadress. Kontrollera din inkorg. Gå till <a href="{{ route('login') }}">inloggningssidan</a> när du är klar.</p>
 
-    <!-- Handle resending verification email -->
     <form action="{{ route('auth.verify.resend') }}" method="post">
         @csrf
         <div class="form-group">
-            <button class="main-button-design" type="submit" id="resend-button" @if (!$can_resend) disabled @endif>Resend Verification Email</button>
+            <button class="main-button-design" type="submit" id="resend-button" @if (!$can_resend) disabled @endif>Skicka verifierings e-post igen</button>
         </div>
     </form>
 
     @if (!$can_resend)
-        <p>Please wait <span id="countdown">{{ intval($remaining_time) }}</span> seconds before resending.</p>
+        <p>Vänta <span id="countdown">{{ intval($remaining_time) }}</span> sekunder innan du skickar igen.</p>
     @endif
 
-    <!-- Display error or success messages -->
     @if ($errors->has('email_err'))
         <div class="error-message">{{ $errors->first('email_err') }}</div>
     @endif

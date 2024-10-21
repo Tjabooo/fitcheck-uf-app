@@ -14,8 +14,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 // Registration Routes
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest')->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
-
-// Registration Confirmation
 Route::get('/registration/confirmation', [RegisterController::class, 'showConfirmationPage'])->name('registration.confirmation');
 
 // Email Verification Routes

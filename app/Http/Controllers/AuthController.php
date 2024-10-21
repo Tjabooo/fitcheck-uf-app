@@ -35,7 +35,7 @@ class AuthController extends Controller
             // Check if the user is verified
             if (!$user->verified) {
                 Auth::logout();
-                return back()->withErrors(['email' => 'Please verify your email before logging in.']);
+                return back()->withErrors(['email' => 'Vänligen verifiera din e-post innan du loggar in.']);
             }
 
             $request->session()->regenerate();
@@ -44,7 +44,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The credentials you provided did not match an account in our system.',
+            'email' => 'Uppgifterna du angav matchade inte ett konto i vårt system.',
         ]);
     }
 
@@ -76,7 +76,7 @@ class AuthController extends Controller
             ->count();
 
         if ($recentAttempts >= $maxAttempts) {
-            return back()->withErrors(['rate_limit' => 'Too many registration attempts. Please try again later.']);
+            return back()->withErrors(['rate_limit' => 'För många registreringsförsök. Vänligen försök igen senare.']);
         }
 
         // Record registration attempt
@@ -179,7 +179,7 @@ class AuthController extends Controller
         // Rate limit: Allow resend every 60 seconds
         if ($tokenData && Carbon::now()->diffInSeconds($tokenData->last_sent) < 60) {
             $remainingTime = 60 - Carbon::now()->diffInSeconds($tokenData->last_sent);
-            return back()->withErrors(['resend_limit' => "Please wait $remainingTime seconds before resending."]);
+            return back()->withErrors(['resend_limit' => "Var snäll och vänta $remainingTime sekunder innan du försöker igen."]);
         }
 
         // Generate new token
@@ -200,6 +200,6 @@ class AuthController extends Controller
         // Send verification email
         $this->sendVerificationEmail($user->email, $token);
 
-        return back()->with('message', 'A new verification email has been sent.');
+        return back()->with('message', 'Ett nytt verifieringsmail har skickats till din e-post.');
     }
 }

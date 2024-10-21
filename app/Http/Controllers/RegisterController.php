@@ -32,7 +32,7 @@ class RegisterController extends Controller
             ->count();
 
         if ($recentAttempts >= $maxAttempts) {
-            return back()->withErrors(['rate_limit_err' => 'Too many registration attempts. Please try again later.']);
+            return back()->withErrors(['rate_limit_err' => 'För många registreringsförsök. Försök igen senare.']);
         }
 
         // Record registration attempt
@@ -146,7 +146,7 @@ class RegisterController extends Controller
         // Rate limit: Allow resend every 60 seconds
         if ($tokenData && Carbon::now()->diffInSeconds($tokenData->last_sent) < 60) {
             $remainingTime = 60 - Carbon::now()->diffInSeconds($tokenData->last_sent);
-            return back()->withErrors(['resend_limit' => "Please wait $remainingTime seconds before resending."]);
+            return back()->withErrors(['resend_limit' => "Var snäll och vänta $remainingTime sekunder innan du försöker igen."]);
         }
 
         // Generate new token

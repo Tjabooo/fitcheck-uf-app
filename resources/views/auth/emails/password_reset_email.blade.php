@@ -1,10 +1,10 @@
 <html>
     <head>
-      <title>Reset Password - FitCheck UF</title>
+      <title>Återställ lösenord - FitCheck UF</title>
     </head>
     <body>
-      <p>To reset your password, please click the link below:</p>
-      <p><a href='{{ $resetLink }}'>Reset Password</a></p>
-      <p>If you did not request a password reset, please ignore this email.</p>
+      <p>För att återställa ditt lösenord, vänligen tryck på länken nedanför:</p>
+      <p><a href='{{ $resetLink }}'>Återställ lösenord</a></p>
+      <p>Om du inte begärde en lösenordsåterställning, ignorera detta e-postmeddelande.</p>
     </body>
-    </html>
+</html>

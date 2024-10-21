@@ -28,7 +28,7 @@ class VerificationMail extends Mailable
     {
         return new Envelope(
             from: new Address('noreply@fitcheck.nu', 'FitCheck UF'),
-            subject: 'Email Verification - FitCheck UF',
+            subject: 'Verifiera e-post - FitCheck UF',
         );
     }
 

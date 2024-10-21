@@ -29,7 +29,7 @@ class ResetPasswordMail extends Mailable
     {
         return new Envelope(
             from: new Address('noreply@fitcheck.nu', 'Fitcheck UF'),
-            subject: 'Reset Password - FitCheck UF',
+            subject: 'Återställ lösenord - FitCheck UF',
         );
     }
 

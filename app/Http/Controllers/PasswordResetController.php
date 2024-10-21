@@ -74,7 +74,7 @@ class PasswordResetController extends Controller
             ->first();
 
         if (!$tokenData || Carbon::parse($tokenData->expires)->isPast()) {
-            return redirect()->route('errors.invalid_token')->withErrors(['invalid_request_err' => 'Invalid or expired token.']);
+            return redirect()->route('errors.invalid_token')->withErrors(['invalid_request_err' => 'Ogiltig eller utgånget token.']);
         }
 
         return view('auth.passwords.reset')->with(['token' => $token, 'email' => $email]);
@@ -97,13 +97,13 @@ class PasswordResetController extends Controller
             ->first();
 
         if (!$tokenData || Carbon::parse($tokenData->expires)->isPast()) {
-            return back()->withErrors(['invalid_request_err' => 'Invalid or expired token.']);
+            return back()->withErrors(['invalid_request_err' => 'Ogiltig eller utgånget token.']);
         }
 
         // Update user's password
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            return back()->withErrors(['invalid_request_err' => 'The credentials you provided did not match an account in our system.']);
+            return back()->withErrors(['invalid_request_err' => 'Uppgifterna du angav matchade inte något konto i vårt system.']);
         }
 
         $user->password = Hash::make($request->password);
@@ -112,6 +112,6 @@ class PasswordResetController extends Controller
         // Delete token
         DB::table('password_resets')->where('email', $request->email)->delete();
 
-        return redirect()->route('login')->with('status', 'Password reset successful. You can now log in.');
+        return redirect()->route('login')->with('status', 'Lösenord återställt. Du kan nu logga in.');
     }
 }

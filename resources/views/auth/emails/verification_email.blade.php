@@ -1,11 +1,11 @@
 <html>
     <head>
-        <title>Email Verification - FitCheck UF</title>
+        <title>E-post verifiering - FitCheck UF</title>
     </head>
     <body>
-        <p>Thank you for registering with FitCheck UF!</p>
-        <p>Please click the link below to verify your email address:</p>
-        <p><a href='{{ $verificationLink }}'>Verify Email</a></p>
-        <p>If you did not register, please ignore this email.</p>
+        <p>Tack för att du registrerade hos FitCheck UF!</p>
+        <p>Vänligen tryck på länken nedanför för att verifiera din e-postadress:</p>
+        <p><a href='{{ $verificationLink }}'>Verifiera e-post</a></p>
+        <p>Om du inte registrerade hos FitCheck UF, kan du ignorera detta e-postmeddelande.</p>
     </body>
 </html>
