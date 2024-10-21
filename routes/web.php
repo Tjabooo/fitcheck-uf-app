@@ -30,6 +30,11 @@ Route::post('/password/reset', [PasswordResetController::class, 'reset'])->middl
 Route::post('/password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
 Route::get('/password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->middleware('guest')->name('password.reset');
 
+// Error Routes
+Route::get('/invalid_token', function () {
+    return view('auth.errors.invalid_token');
+})->name('errors.invalid_token');
+
 // Protected Routes
 Route::middleware(['auth', BlockDesktopAccess::class])->group(function () {
     Route::get('/', function () {

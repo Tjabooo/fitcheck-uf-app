@@ -44,7 +44,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'No account found with that e-mail.',
+            'email' => 'The credentials you provided did not match an account in our system.',
         ]);
     }
 

@@ -406,8 +406,8 @@ nav button span {
 
 .error-message, .success-message {
     max-width: 600px;
-    margin: 20px auto;
-    padding: 15px;
+    margin-top: 0px;
+    margin-bottom: 5px;
     border-radius: 5px;
     font-size: 16px;
     text-align: center;

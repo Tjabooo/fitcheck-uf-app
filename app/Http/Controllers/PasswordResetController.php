@@ -65,7 +65,7 @@ class PasswordResetController extends Controller
     public function showResetForm(Request $request)
     {
         $token = $request->token;
-        $email = $request->email;
+        $email = urldecode($request->email);
 
         // Validate token
         $tokenData = DB::table('password_resets')
@@ -74,7 +74,7 @@ class PasswordResetController extends Controller
             ->first();
 
         if (!$tokenData || Carbon::parse($tokenData->expires)->isPast()) {
-            return view('auth.passwords.reset')->with('invalid_request_err', 'Invalid or expired token.');
+            return redirect()->route('errors.invalid_token')->withErrors(['invalid_request_err' => 'Invalid or expired token.']);
         }
 
         return view('auth.passwords.reset')->with(['token' => $token, 'email' => $email]);
@@ -83,6 +83,8 @@ class PasswordResetController extends Controller
     // Handle password reset
     public function reset(Request $request)
     {
+        $request->merge(['email' => urldecode($request->email)]);
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|confirmed|min:8|max:32',
@@ -91,7 +93,7 @@ class PasswordResetController extends Controller
 
         $tokenData = DB::table('password_resets')
             ->where('token', $request->token)
-            ->where('email', $request->email)
+            ->where('email', urldecode($request->email))
             ->first();
 
         if (!$tokenData || Carbon::parse($tokenData->expires)->isPast()) {
@@ -101,7 +103,7 @@ class PasswordResetController extends Controller
         // Update user's password
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            return back()->withErrors(['invalid_request_err' => 'No account found with that email.']);
+            return back()->withErrors(['invalid_request_err' => 'The credentials you provided did not match an account in our system.']);
         }
 
         $user->password = Hash::make($request->password);

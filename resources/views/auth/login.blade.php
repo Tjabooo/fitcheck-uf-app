@@ -7,6 +7,11 @@
     <h2>Login</h2>
     <form action="{{ route('login') }}" method="post">
         @csrf
+        @if (session('status'))
+            <div class="success-message">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="form-group @error('email') has-error @enderror">
             <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
             @error('email')
