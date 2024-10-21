@@ -80,7 +80,7 @@ class RegisterController extends Controller
             return redirect()->route('registration.confirmation');
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->withErrors(['registration_error' => 'Oops! Something went wrong. Please try again later.']);
+            return back()->withErrors(['registration_error' => $e->getMessage()]);
         }
     }
 

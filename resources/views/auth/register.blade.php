@@ -5,15 +5,6 @@
 @section('content')
 <div class="auth-container">
     <h2>Register</h2>
-    @if ($errors->any())
-        <div class="error-message">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <form action="{{ route('register') }}" method="post">
         @csrf
         <div class="form-group @error('username') has-error @enderror">
@@ -43,6 +34,15 @@
         <div class="form-group">
             <button class="main-button-design" type="submit">Register</button>
         </div>
+        @if ($errors->any())
+        <div class="error-message">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <p>Already have an account? <a href="{{ route('login') }}">Login here</a>.</p>
     </form>
 </div>
