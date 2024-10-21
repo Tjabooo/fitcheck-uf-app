@@ -13,11 +13,11 @@
         <input type="hidden" name="token" value="{{ $token }}">
         <input type="hidden" name="email" value="{{ $email }}">
         <div class="form-group @error('password') has-error @enderror">
-            <input type="password" name="password" placeholder="New Password" required>
-            @error('password')
-                <span class="help-block">{{ $message }}</span>
-            @enderror
-        </div>
+                <input type="password" name="password" placeholder="New Password" required>
+                @error('password')
+                    <span class="help-block">{{ $message }}</span>
+                @enderror
+            </div>
         <div class="form-group @error('password_confirmation') has-error @enderror">
             <input type="password" name="password_confirmation" placeholder="Confirm New Password" required>
             @error('password_confirmation')

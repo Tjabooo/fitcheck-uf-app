@@ -5,7 +5,7 @@
 @section('content')
 <div class="auth-container">
     <h2>Email Verification</h2>
-    @if (isset($verified))
+    @if ($verified)
         <p>Your email has been successfully verified! You can now <a href="{{ route('login') }}">log in</a>.</p>
     @else
         @if ($errors->has('verification_err'))

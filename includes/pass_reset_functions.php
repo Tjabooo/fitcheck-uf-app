@@ -65,7 +65,7 @@ function reset_user_password($mysqli, $email, $token, $password) {
     // Check for valid password reset request
     $sql = "SELECT * FROM password_resets WHERE email = ? AND expires >= ?";
     $stmt = $mysqli->prepare($sql);
-    
+
     if (!$stmt) {
         $invalid_request_err = "Something went wrong. Please try again.";
         return $invalid_request_err;
@@ -86,7 +86,7 @@ function reset_user_password($mysqli, $email, $token, $password) {
     // Update user password
     $sql = "UPDATE users SET password = ? WHERE email = ?";
     $stmt_update = $mysqli->prepare($sql);
-    
+
     if (!$stmt_update) {
         return "Something went wrong. Please try again.";
     }

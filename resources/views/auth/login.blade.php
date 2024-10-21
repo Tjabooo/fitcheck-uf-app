@@ -5,11 +5,6 @@
 @section('content')
 <div class="auth-container">
     <h2>Login</h2>
-    @if ($errors->any())
-        <div class="error-message">
-            {{ $errors->first() }}
-        </div>
-    @endif
     <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="form-group @error('email') has-error @enderror">

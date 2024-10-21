@@ -34,15 +34,6 @@
         <div class="form-group">
             <button class="main-button-design" type="submit">Register</button>
         </div>
-        @if ($errors->any())
-        <div class="error-message">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
         <p>Already have an account? <a href="{{ route('login') }}">Login here</a>.</p>
     </form>
 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\EmailVerificationToken;
+use App\Mail\VerificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -89,10 +90,8 @@ class RegisterController extends Controller
     {
         $verificationLink = route('auth.verify', ['token' => $token, 'email' => urlencode($email)]);
 
-        Mail::send('emails.verify_email', ['verificationLink' => $verificationLink], function ($message) use ($email) {
-            $message->to($email)
-                ->subject('Email Verification - FitCheck UF');
-        });
+        Mail::to($email)
+            ->send(new VerificationMail($verificationLink));
     }
 
     // Show registration confirmation page

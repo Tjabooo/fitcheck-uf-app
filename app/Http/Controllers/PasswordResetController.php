@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Mail\ResetPasswordMail;
 
 class PasswordResetController extends Controller
 {
@@ -56,10 +57,8 @@ class PasswordResetController extends Controller
     {
         $resetLink = route('password.reset', ['token' => $token, 'email' => urlencode($email)]);
 
-        Mail::send('emails.reset_password', ['resetLink' => $resetLink], function ($message) use ($email) {
-            $message->to($email)
-                ->subject('Reset Password - FitCheck UF');
-        });
+        Mail::to($email)
+            ->send(new ResetPasswordMail($resetLink));
     }
 
     // Show reset form
@@ -75,10 +74,10 @@ class PasswordResetController extends Controller
             ->first();
 
         if (!$tokenData || Carbon::parse($tokenData->expires)->isPast()) {
-            return view('auth.passwords.reset');
+            return view('auth.passwords.reset')->with('invalid_request_err', 'Invalid or expired token.');
         }
 
-        return view('auth.passwords.reset', compact('token', 'email'));
+        return view('auth.passwords.reset')->with(['token' => $token, 'email' => $email]);
     }
 
     // Handle password reset

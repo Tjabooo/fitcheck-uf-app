@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\EmailVerificationToken;
+use App\Mail\VerificationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,7 +44,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'No account found with that e-mail.',
         ]);
     }
 
@@ -114,7 +115,7 @@ class AuthController extends Controller
         // Store email in session for possible resend
         session(['email' => $user->email]);
 
-        return redirect()->route('auth.verify.notice');
+        return redirect()->route('  .notice');
     }
 
     // Send verification email
@@ -122,10 +123,8 @@ class AuthController extends Controller
     {
         $verificationLink = route('auth.verify', ['token' => $token, 'email' => urlencode($email)]);
 
-        Mail::send('emails.verify_email', ['verificationLink' => $verificationLink], function ($message) use ($email) {
-            $message->to($email)
-                ->subject('Email Verification - FitCheck UF');
-        });
+        Mail::to($email)
+            ->send(new VerificationMail($verificationLink));
     }
 
     // Show verification notice
@@ -142,23 +141,22 @@ class AuthController extends Controller
 
         $verificationToken = EmailVerificationToken::where('token', $token)->first();
 
+
         if (!$verificationToken || $verificationToken->expires < Carbon::now()) {
-            return view('auth.verify_email');
+            return view('auth.emails.verify_email');
         }
 
         $user = $verificationToken->user;
-        if ($user->email !== $email) {
-            return view('auth.verify_email');
-        }
 
         $user->verified = true;
         $user->email_verified_at = Carbon::now();
         $user->save();
 
+
         // Delete the token
         $verificationToken->delete();
 
-        return view('auth.verify_email', ['verified' => true]);
+        return view('auth.emails.verify_email', ['verified' => true]);
     }
 
     // Resend verification email

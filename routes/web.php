@@ -33,6 +33,6 @@ Route::get('/password/reset/{token}', [PasswordResetController::class, 'showRese
 // Protected Routes
 Route::middleware(['auth', BlockDesktopAccess::class])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     })->name('home');
 });
