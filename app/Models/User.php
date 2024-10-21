@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'verified'
     ];
 
     /**
@@ -32,6 +33,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function getIsVerifiedAttribute()
+    {
+        return $this->verified;
+    }
 
     /**
      * Get the attributes that should be cast.
