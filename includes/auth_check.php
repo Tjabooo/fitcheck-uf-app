@@ -1,7 +1,5 @@
 <?php
-// auth_check.php
 
-// Start session with cookie parameters
 session_set_cookie_params([
     'lifetime' => 86400 * 30,
     'path' => '/',
@@ -35,13 +33,13 @@ if ($stmt = $mysqli->prepare($sql)) {
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
-    
+
     if ($stmt->num_rows !== 1) {
         $stmt->close();
         header("location: logout.php");
         exit;
     }
-    
+
     $stmt->close();
 } else {
     header("location: logout.php");
