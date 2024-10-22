@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class AuthController extends Controller
@@ -76,7 +77,7 @@ class AuthController extends Controller
             ->count();
 
         if ($recentAttempts >= $maxAttempts) {
-            return back()->withErrors(['rate_limit' => 'För många registreringsförsök. Vänligen försök igen senare.']);
+            return back()->withErrors(['rate_limit_err' => 'För många registreringsförsök. Försök igen senare.']);
         }
 
         // Record registration attempt
@@ -87,35 +88,46 @@ class AuthController extends Controller
 
         // Validate input
         $request->validate([
-            'username' => 'required|string|max:24|unique:users|alpha_num',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:24|unique:users,username|alpha_num',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|confirmed|min:8|max:32',
         ]);
 
-        // Create user
-        $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // Start transaction
+        DB::beginTransaction();
 
-        // Generate email verification token
-        $token = bin2hex(random_bytes(32));
+        try {
+            // Create user
+            $user = User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        EmailVerificationToken::create([
-            'user_id' => $user->id,
-            'token' => $token,
-            'expires' => Carbon::now()->addDay(),
-            'last_sent' => Carbon::now(),
-        ]);
+            // Generate email verification token
+            $token = bin2hex(random_bytes(32));
 
-        // Send verification email
-        $this->sendVerificationEmail($user->email, $token);
+            EmailVerificationToken::create([
+                'user_id' => $user->id,
+                'token' => $token,
+                'expires' => Carbon::now()->addDay(),
+                'last_sent' => Carbon::now(),
+            ]);
 
-        // Store email in session for possible resend
-        session(['email' => $user->email]);
+            // Commit transaction
+            DB::commit();
 
-        return redirect()->route('  .notice');
+            // Send verification email
+            $this->sendVerificationEmail($user->email, $token);
+
+            // Store email in session for possible resend
+            session(['email' => $user->email]);
+
+            return redirect()->route('registration.confirmation');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->withErrors(['registration_error' => $e->getMessage()]);
+        }
     }
 
     // Send verification email
@@ -125,6 +137,38 @@ class AuthController extends Controller
 
         Mail::to($email)
             ->send(new VerificationMail($verificationLink));
+    }
+
+    // Show registration confirmation page
+    public function showConfirmationPage()
+    {
+        $email = session('email');
+        if (!$email) {
+            return redirect()->route('register');
+        }
+
+        // Check if the user can resend verification email
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            return redirect()->route('register');
+        }
+
+        $tokenData = EmailVerificationToken::where('user_id', $user->id)->first();
+
+        $canResend = true;
+        $remainingTime = 0;
+
+        if ($tokenData && Carbon::now()->diffInSeconds($tokenData->last_sent) < 60) {
+            $canResend = false;
+            $remainingTime = 60 - Carbon::now()->diffInSeconds($tokenData->last_sent);
+        }
+
+        return view('auth.registration_confirmation', [
+            'can_resend' => $canResend,
+            'remaining_time' => $remainingTime,
+            'email_err' => session('email_err'),
+            'message' => session('message'),
+        ]);
     }
 
     // Show verification notice

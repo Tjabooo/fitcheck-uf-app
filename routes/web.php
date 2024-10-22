@@ -5,16 +5,17 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-// Authentication Routes
+// Login Routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 
+// Logout Route
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // Registration Routes
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest')->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
-Route::get('/registration/confirmation', [RegisterController::class, 'showConfirmationPage'])->name('registration.confirmation');
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->middleware('guest')->name('register');
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::get('/registration/confirmation', [AuthController::class, 'showConfirmationPage'])->name('registration.confirmation');
 
 // Email Verification Routes
 Route::get('/email/verify', [AuthController::class, 'showVerificationNotice'])->name('auth.verify.notice');
