@@ -1,16 +1,16 @@
-// not in order, will do what i feel like when i feel like it
+not in order, will do what i feel like when i feel like it
+prefix - means not completed, + means completed. no marking means it's a comment
 
-# make both email and password input fields light up red with credential error
+- make both email and password input fields light up red with credential error
 
-# fix header logo scaling on mobile
+- fix header logo scaling on mobile
 
-# re-do the add clothing screen
+- re-do the add clothing screen
 
-# add logout button on profile page
+- add logout button on profile page
 
-# add privacy policy/terms of service
+- add privacy policy/terms of service
 
-# make delete account button functional
+- make delete account button functional
 
-# fix any miscellaneous .css issues/ugliness around the website
-
+- fix any miscellaneous .css issues/ugliness around the website
