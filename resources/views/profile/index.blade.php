@@ -24,5 +24,13 @@
         <p><strong>{{ $user->username }}</strong></p>
         <p>{{ $user->email }}</p>
     </div>
+    <br>
+    <h2>
+        OBS! Det här är en prototyp. Appen är ännu inte funktionell. Ursäkta eventuella buggar.
+    </h2>
+    <br>
+    <h2>
+        Om du har några frågor, kontakta oss på kontakt@fitcheck.nu
+    </h2>
 <section>
 @endsection
