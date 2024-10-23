@@ -74,7 +74,7 @@ nav {
     height: 80px;
 }
 
-nav button {
+nav a {
     background: none;
     border: none;
     flex: 1;
@@ -87,12 +87,16 @@ nav button {
     text-decoration: none;
 }
 
-nav button img {
+nav a {
+    text-decoration: none;
+}
+
+nav a img {
     width: 24px;
     height: 24px;
 }
 
-nav button span {
+nav a span {
     font-size: 12px;
     margin-top: 5px;
     color: #000;
@@ -284,7 +288,6 @@ nav button span {
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    font-family: "Outfit", sans-serif;
     font-size: 11px;
     padding: 10px;
     text-align: center;
@@ -311,7 +314,7 @@ nav button span {
 
 .auth-container h2 {
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 28px;
 }
 
@@ -493,8 +496,9 @@ nav button span {
     padding: 8px 15px;
     font-size: 14px;
     border-radius: 5px;
-    margin-top: 10px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -517,8 +521,8 @@ nav button span {
 }
 
 #delete-account-button {
-    width: 100px;
-    margin-top: 20px;
+    width: 30%;
+    margin-top: 10px;
     margin-right: auto;
     margin-left: auto;
     display: block;

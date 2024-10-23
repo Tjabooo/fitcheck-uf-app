@@ -20,7 +20,7 @@ class BlockDesktopAccess
         if (
             !preg_match('/Mobi|Android|iPhone|iPad/i', $_SERVER['HTTP_USER_AGENT']) &&
             $blockDesktopAccess &&
-            !$request->is('desktop')
+            !$request->is('skrivbord')
         ) {
             return response(redirect()->route('errors.desktop'));
         }

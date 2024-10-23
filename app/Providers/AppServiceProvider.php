@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\ClothingArticle;
+use App\Policies\ClothingArticlePolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        ClothingArticle::class => ClothingArticlePolicy::class,
+    ];
+
     /**
      * Register any application services.
      */

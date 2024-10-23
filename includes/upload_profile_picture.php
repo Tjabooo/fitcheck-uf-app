@@ -1,5 +1,4 @@
 <?php
-// includes/upload_profile_picture.php
 
 session_start();
 require_once 'db_config.php';

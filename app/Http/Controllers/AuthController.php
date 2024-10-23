@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\EmailVerificationToken;
 use App\Mail\VerificationMail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -133,7 +134,7 @@ class AuthController extends Controller
     // Send verification email
     protected function sendVerificationEmail($email, $token)
     {
-        $verificationLink = route('auth.verify', ['token' => $token, 'email' => urlencode($email)]);
+        $verificationLink = route('auth.verify', ['token' => $token]);
 
         Mail::to($email)
             ->send(new VerificationMail($verificationLink));
@@ -246,4 +247,24 @@ class AuthController extends Controller
 
         return back()->with('message', 'Ett nytt verifieringsmail har skickats till din e-post.');
     }
+
+    public function destroyAccount(Request $request)
+    {
+        $user = Auth::user();
+
+        // Delete user images
+        $userImagesPath = "public_html/user_images/{$user->id}";
+        Storage::deleteDirectory($userImagesPath);
+
+        // Delete the user (this will cascade and delete clothing articles due to foreign key constraints)
+        $user->delete();
+
+        // Logout the user
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('status', 'Your account has been deleted.');
+    }
+
 }

@@ -2,59 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    // Display the user's profile
+    public function index()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = Auth::user();
+        return view('profile.index')->with(['user' => $user]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    // Upload and update profile picture
+    public function updateProfilePicture(Request $request)
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Validate request
+        if (!$request->hasFile('profile_picture')) {
+            return response()->json(['success' => false, 'error' => 'No file uploaded'], 400);
         }
 
-        $request->user()->save();
+        $file = $request->file('profile_picture');
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png|max:2048', // Only allow jpg and png, max size 2MB
         ]);
 
-        $user = $request->user();
+        // Determine file extension
+        $extension = $file->getClientOriginalExtension();
+        $filename = $user->username . '.' . $extension;
 
-        Auth::logout();
+        $target_directory = 'assets/profile-pictures/';
+        $path = $target_directory . $filename;
 
-        $user->delete();
+        // Delete old profile picture if it exists
+        foreach (['jpg', 'jpeg', 'png'] as $ext) {
+            $old_file = $target_directory . $user->username . '.' . $ext;
+            if (file_exists(public_path($old_file)) && $old_file !== $path) {
+                unlink(public_path($old_file)); // Use unlink to delete the file
+            }
+        }
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // Store the new file in the public directory
+        $file->move(public_path($target_directory), $filename); // Use move instead of storeAs
 
-        return Redirect::to('/');
+        // Update the user's profile with the new image path
+        $user->profile_picture_path = $path; // Save the relative path
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'profile_picture' => asset($path), // Use asset to generate the URL
+        ]);
     }
 }
