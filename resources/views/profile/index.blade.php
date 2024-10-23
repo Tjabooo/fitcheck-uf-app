@@ -11,7 +11,7 @@
     @endif
     <div class="profile-info">
         <div class="profile-picture-container">
-            <img src="{{ $user->profile_picture_path ? asset($user->profile_picture_path) : asset('assets/profile-pictures/default-profile.png') }}" alt="Profile Picture" id="profile-picture" class="profile-picture" />
+            <img src="{{ asset($user->profile_picture_path) }}" alt="Profile Picture" id="profile-picture" class="profile-picture" />
             <input hidden=true type="file" id="profile-picture-input" name="profile_picture" accept="image/*" required />
             <button id="edit-profile-picture" class="edit-icon" title="Edit Profile Picture">
                 <img src="{{ asset('assets/icons/edit-icon.png') }}" alt="Edit" />
