@@ -3,6 +3,8 @@
 /public_html/build
 /public_html/hot
 /public_html/storage
+/public_html/assets/profile-pictures/*.png
+!/public_html/assets/profile-pictures/default-profile.png
 /storage/*.key
 /storage/pail
 /vendor

@@ -516,8 +516,99 @@ nav a span {
     margin-top: 10px;
 }
 
-.settings-page h3, h2, p {
+.settings-page {
+    background-color: #f2f2f7;
+    padding: 20px;
+}
+
+.settings-section {
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #6e6e73;
+    margin-bottom: 10px;
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-label {
+    font-size: 16px;
+    color: #000;
+}
+
+.settings-value {
+    font-size: 16px;
+    color: #6e6e73;
+}
+
+.settings-item.clickable {
+    cursor: pointer;
+}
+
+.settings-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 8px;
     text-align: center;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.settings-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-bottom: -3px;
+}
+
+.delete-button {
+    background-color: #ff3b30;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+form {
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .settings-page {
+        padding: 10px;
+    }
+
+    .settings-section {
+        padding: 15px;
+    }
+
+    .settings-item {
+        padding: 8px 0;
+    }
+
+    .settings-button {
+        padding: 8px;
+    }
 }
 
 #delete-account-button {

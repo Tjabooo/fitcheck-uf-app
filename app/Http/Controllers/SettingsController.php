@@ -12,7 +12,8 @@ class SettingsController extends Controller
     // Display profile settings
     public function index()
     {
-        return view('profile.settings');
+        $user = Auth::user();
+        return view('profile.settings')->with(['user' => $user]);
     }
 
     // Delete the user's account

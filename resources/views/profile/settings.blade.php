@@ -3,18 +3,49 @@
 @section('title', 'Inställningar')
 
 @section('content')
-<section class="screen settings-page">
-    <h2>Inställningar</h2>
-    <div class="auth-container">
-        <div class="delete-account">
-            <h3>Radera ditt konto</h3>
-            <p>Varning: Den här åtgärden kan inte ångras. All din data kommer bli permanent raderad.</p>
-            <form action="{{ route('account.destroy') }}" method="POST" onsubmit="return confirm('Är du säker på att du vill radera ditt konto?');">
+@include('partials.nav')
+
+<section class="settings-page screen">
+    <div class="settings-section">
+        <h2>Konto</h2>
+
+        <!-- User Info Section -->
+        <div class="settings-item">
+            <div class="settings-label">Användarnamn</div>
+            <div class="settings-value">{{ $user->username }}</div>
+        </div>
+        <div class="settings-item">
+            <div class="settings-label">E-post</div>
+            <div class="settings-value">{{ $user->email }}</div>
+        </div>
+        <div class="settings-item">
+            <div class="settings-label">Lösenord</div>
+            <div class="settings-value">********</div>
+        </div>
+        <!-- Logout Section -->
+        <div class="settings-item clickable">
+            <form action="{{ route('logout') }}" method="POST" id="logout-form" onsubmit="return confirm('Är du säker på att du vill logga ut?');">
+                @csrf
+                <button type="submit" class="settings-button main-button-design">
+                    <img src="{{ asset('assets/icons/logout-icon.png') }}" alt="Logout" />
+                    Logga ut
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="settings-section">
+        <h2>Danger Zone</h2>
+
+        <!-- Delete Account Section -->
+        <div class="settings-item clickable">
+            <form action="{{ route('account.destroy') }}" method="POST" id="delete-form" onsubmit="return confirm('Är du säker på att du vill radera ditt konto?\nDet här går inte att ångra.');">
                 @csrf
                 @method('DELETE')
-                <button id="delete-account-button" class="main-button-design" style="background-color: #e74c3c;">Radera konto</button>
-                <div id="delete-error" class="error-message" style="display: none;"></div>
-                <div id="delete-status" class="success-message" style="display: none;"></div>
+                <button type="submit" class="settings-button delete-button">
+                    <img src="{{ asset('assets/icons/delete-icon.png') }}" alt="Delete"/>
+                    Radera konto
+                </button>
             </form>
         </div>
     </div>
