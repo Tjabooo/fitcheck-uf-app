@@ -34,7 +34,6 @@ class ClosetController extends Controller
         $request->validate([
             'article' => 'required|string|max:255',
             'image' => 'required|image|max:2048', // Max 2MB
-            // Add validation for other fields as needed
         ]);
 
         $user = Auth::user();
