@@ -39,7 +39,7 @@
 
         <!-- Delete Account Section -->
         <div class="settings-item clickable">
-            <form action="{{ route('account.destroy') }}" method="POST" id="delete-form" onsubmit="return confirm('Är du säker på att du vill radera ditt konto?\nDet här går inte att ångra.');">
+            <form action="{{ route('account.destroy') }}" method="POST" id="delete-form" onsubmit="return confirm('Är du säker på att du vill radera ditt konto?\nDen här handlingen går inte att ångra.');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="settings-button delete-button">
