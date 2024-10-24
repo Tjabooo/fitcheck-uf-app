@@ -11,7 +11,7 @@ prefix - means not completed, + means completed. no marking means it's a comment
 
 - add privacy policy/terms of service
 
-- make delete account button functional
++ make delete account button functional
 
 - fix any miscellaneous .css issues/mistakes around the website
 
@@ -23,6 +23,6 @@ prefix - means not completed, + means completed. no marking means it's a comment
 
 - make change password feature in settings
 
-- make login data save in cookies (no need to login every time u visit the site)
++ make login data save in cookies (no need to login every time u visit the site)
 
-+ add 30-day login cookies
+- disable direct traversal to image assets

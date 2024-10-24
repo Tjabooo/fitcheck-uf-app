@@ -18,7 +18,7 @@ class ProfileController extends Controller
     // Upload and update profile picture
     public function updateProfilePicture(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         // Validate request
         if (!$request->hasFile('profile_picture')) {
@@ -42,20 +42,20 @@ class ProfileController extends Controller
         foreach (['jpg', 'jpeg', 'png'] as $ext) {
             $old_file = $target_directory . $user->username . '.' . $ext;
             if (file_exists(public_path($old_file)) && $old_file !== $path) {
-                unlink(public_path($old_file)); // Use unlink to delete the file
+                unlink(public_path($old_file));
             }
         }
 
         // Store the new file in the public directory
-        $file->move(public_path($target_directory), $filename); // Use move instead of storeAs
+        $file->move(public_path($target_directory), $filename);
 
         // Update the user's profile with the new image path
-        $user->profile_picture_path = $path; // Save the relative path
+        $user->profile_picture_path = $path;
         $user->save();
 
         return response()->json([
             'success' => true,
-            'profile_picture' => asset($path), // Use asset to generate the URL
+            'profile_picture' => asset($path),
         ]);
     }
 }

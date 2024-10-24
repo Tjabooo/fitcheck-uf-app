@@ -19,11 +19,12 @@ class SettingsController extends Controller
     // Delete the user's account
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
         $user = $request->user();
+
+        // Delete the user's profile picture if it exists
+        if ($user->profile_picture_path != 'assets/profile-pictures/default-picture.png' && file_exists(public_path($user->profile_picture_path))) {
+            unlink(public_path($user->profile_picture_path));
+        }
 
         Auth::logout();
 
@@ -32,6 +33,6 @@ class SettingsController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect('/')->with('status', 'Ditt konto har raderats.');
     }
 }

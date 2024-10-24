@@ -58,7 +58,7 @@ Route::post('/lösenord/epost', [PasswordResetController::class, 'sendResetLinkE
 Route::get('/lösenord/återställ/{token}', [PasswordResetController::class, 'showResetForm'])->middleware('guest')->name('password.reset');
 
 // Delete account
-Route::delete('/account', [AuthController::class, 'destroyAccount'])->middleware('auth')->name('account.destroy');
+Route::delete('/account', [SettingsController::class, 'destroy'])->middleware('auth')->name('account.destroy');
 
 // Error Routes
 Route::get('/ogiltig-token', function () {
