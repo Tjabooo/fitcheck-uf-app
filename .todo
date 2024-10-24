@@ -3,7 +3,7 @@ prefix - means not completed, + means completed. no marking means it's a comment
 
 - make both email and password input fields light up red with credential error
 
-- fix header logo scaling on mobile
++ fix header logo scaling on mobile
 
 - re-do the add clothing screen
 
@@ -14,3 +14,5 @@ prefix - means not completed, + means completed. no marking means it's a comment
 - make delete account button functional
 
 - fix any miscellaneous .css issues/ugliness around the website
+
++ fix back button on reset password page

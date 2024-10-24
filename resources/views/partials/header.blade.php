@@ -1,6 +1,6 @@
 <header>
     <div class="header">
-        @if (request()->is('lösennord/återställ'))
+        @if (request()->is('lösenord/återställ'))
             <div class="header-left">
                 <button class="main-button-design" onclick=location.href="{{ url('/logga-in') }}">
                     Tillbaks till inloggning
