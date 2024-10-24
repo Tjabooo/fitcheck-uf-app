@@ -2,16 +2,16 @@
     <div class="header">
         @if (request()->is('lösenord/återställ'))
             <div class="header-left">
-                <button class="main-button-design" onclick=location.href="{{ url('/logga-in') }}">
-                    Tillbaks till inloggning
-                </button>
+                <a class="back-button" href="{{ route('login') }}">
+                    <img src="{{ asset('assets/icons/back-icon.png') }}" />
+                </a>
             </div>
         @endif
         @if (request()->is('spegel/inställningar'))
             <div class="header-left">
-                <button class="main-button-design" onclick=location.href="{{ url('/spegel') }}">
-                    Tillbaks till spegeln
-                </button>
+                <a class="back-button" href="{{ route('profile.index') }}">
+                    <img src="{{ asset('assets/icons/back-icon.png') }}" />
+                </a>
             </div>
         @endif
         <div class="header-center">
