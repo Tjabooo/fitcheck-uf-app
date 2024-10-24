@@ -10,13 +10,9 @@
     <form action="{{ route('auth.verify.resend') }}" method="post">
         @csrf
         <div class="form-group">
-            <button class="main-button-design" type="submit" id="resend-button" @if (!$can_resend) disabled @endif>Skicka verifierings e-post igen</button>
+            <button class="main-button-design" type="submit" id="resend-button">Skicka verifierings e-post igen</button>
         </div>
     </form>
-
-    @if (!$can_resend)
-        <p>Vänta <span id="countdown">{{ intval($remaining_time) }}</span> sekunder innan du skickar igen.</p>
-    @endif
 
     @if ($errors->has('email_err'))
         <div class="error-message">{{ $errors->first('email_err') }}</div>
@@ -26,22 +22,4 @@
         <div class="success-message">{{ session('message') }}</div>
     @endif
 </div>
-
-<script>
-    let remainingTime = {{ intval($remaining_time) }};
-    const resendButton = document.getElementById('resend-button');
-    const countdownSpan = document.getElementById('countdown');
-
-    if (remainingTime > 0) {
-        const interval = setInterval(() => {
-            remainingTime--;
-            countdownSpan.textContent = remainingTime;
-            if (remainingTime <= 0) {
-                clearInterval(interval);
-                resendButton.disabled = false;
-                countdownSpan.parentElement.style.display = 'none';
-            }
-        }, 1000);
-    }
-</script>
 @endsection

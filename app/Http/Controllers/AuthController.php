@@ -80,7 +80,9 @@ class AuthController extends Controller
             ->count();
 
         if ($recentAttempts >= $maxAttempts) {
-            return back()->withErrors(['rate_limit_err' => 'För många registreringsförsök. Försök igen senare.']);
+            return back()->withErrors([
+                'registration_error' => 'Du har försökt för många gånger. Försök igen senare.',
+            ]);
         }
 
         // Record registration attempt
@@ -206,33 +208,41 @@ class AuthController extends Controller
         return view('auth.emails.verify_email', ['verified' => true]);
     }
 
-    // Resend verification email
     public function resendVerificationEmail(Request $request)
     {
         $email = session('email');
 
+        // Check if email exists in the session and is valid
         if (!$email) {
             return redirect()->route('register');
         }
 
         $user = User::where('email', $email)->first();
 
+        // If the user is already verified, no need to resend
         if (!$user || $user->verified) {
             return redirect()->route('login');
         }
 
+        // Check if a token already exists for the user
         $tokenData = EmailVerificationToken::where('user_id', $user->id)->first();
 
-        // Rate limit: Allow resend every 60 seconds
+        // Enforce rate limit (60 seconds between resend attempts)
         if ($tokenData && Carbon::now()->diffInSeconds($tokenData->last_sent) < 60) {
             $remainingTime = 60 - Carbon::now()->diffInSeconds($tokenData->last_sent);
-            return back()->withErrors(['resend_limit' => "Var snäll och vänta $remainingTime sekunder innan du försöker igen."]);
+
+            // Return with remaining time to prevent resending too soon
+            return back()->withErrors([
+                'resend_limit' => "Var snäll och vänta $remainingTime sekunder innan du försöker igen.",
+            ])->with([
+                'remaining_time' => $remainingTime,  // Pass this to the frontend
+            ]);
         }
 
-        // Generate new token
+        // If allowed, generate a new token and update last sent time
         $token = bin2hex(random_bytes(32));
 
-        // Delete old token and create new one
+        // Delete old token and create a new one
         if ($tokenData) {
             $tokenData->delete();
         }
@@ -244,9 +254,12 @@ class AuthController extends Controller
             'last_sent' => Carbon::now(),
         ]);
 
-        // Send verification email
+        // Send the verification email
         $this->sendVerificationEmail($user->email, $token);
 
-        return back()->with('message', 'Ett nytt verifieringsmail har skickats till din e-post.');
+        // Return success message and reset the countdown timer
+        return back()->with('message', 'Ett nytt verifieringsmail har skickats till din e-post.')
+                     ->with(['remaining_time' => 60]);  // Reset timer to 60 seconds
     }
+
 }

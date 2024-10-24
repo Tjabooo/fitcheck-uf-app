@@ -42,8 +42,8 @@ Route::post('/logga-in', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logga-ut', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // Registration Routes
-Route::get('/registrera', [AuthController::class, 'showRegistrationForm'])->middleware('guest')->name('register');
-Route::post('/registrera', [AuthController::class, 'register'])->middleware('guest');
+Route::get('/registrera', [AuthController::class, 'showRegistrationForm'])->middleware('guest')->name('register.index');
+Route::post('/registrera', [AuthController::class, 'register'])->middleware('guest')->name('register');
 Route::get('/registrera/bekräftelse', [AuthController::class, 'showConfirmationPage'])->name('registration.confirmation');
 
 // Email Verification Routes

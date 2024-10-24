@@ -5,7 +5,8 @@
 @section('content')
 <div class="auth-container">
     <h2>Registrera</h2>
-    <form action="{{ route('register') }}" method="post">
+
+    <form action="/registrera" method="post">
         @csrf
         <div class="form-group @error('username') has-error @enderror">
             <input type="text" name="username" placeholder="Användarnamn" value="{{ old('username') }}" required maxlength="24">
@@ -34,6 +35,13 @@
         <div class="form-group">
             <button class="main-button-design" type="submit">Registrera</button>
         </div>
+
+        @if ($errors->has('registration_error'))
+        <div class="error-message">
+            {{ $errors->first('registration_error') }}
+        </div>
+        @endif
+
         <p>Har du redan ett konto? <a href="{{ route('login') }}">Logga in här</a>.</p>
     </form>
 </div>

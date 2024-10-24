@@ -34,7 +34,7 @@
             <button class="main-button-design" type="submit">Logga in</button>
         </div>
         <p><a href="{{ route('password.request') }}">Glömt lösenord?</a></p>
-        <p>Har du inget konto? <a href="{{ route('register') }}">Registrera dig här</a>.</p>
+        <p>Har du inget konto? <a href="{{ route('register.index') }}">Registrera dig här</a>.</p>
     </form>
 </div>
 @endsection
