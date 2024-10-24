@@ -30,8 +30,10 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        $remember = $request->has('remember');
+
         // Attempt login
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             $user = Auth::user();
 
             // Check if the user is verified

@@ -25,6 +25,12 @@
             @enderror
         </div>
         <div class="form-group">
+            <label>
+            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            Kom ihåg mig
+            </label>
+        </div>
+        <div class="form-group">
             <button class="main-button-design" type="submit">Logga in</button>
         </div>
         <p><a href="{{ route('password.request') }}">Glömt lösenord?</a></p>
