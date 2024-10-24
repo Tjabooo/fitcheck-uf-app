@@ -249,24 +249,4 @@ class AuthController extends Controller
 
         return back()->with('message', 'Ett nytt verifieringsmail har skickats till din e-post.');
     }
-
-    public function destroyAccount(Request $request)
-    {
-        $user = Auth::user();
-
-        // Delete user images
-        $userImagesPath = "public_html/user_images/{$user->id}";
-        Storage::deleteDirectory($userImagesPath);
-
-        // Delete the user (this will cascade and delete clothing articles due to foreign key constraints)
-        $user->delete();
-
-        // Logout the user
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/')->with('status', 'Your account has been deleted.');
-    }
-
 }
