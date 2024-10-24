@@ -7,20 +7,18 @@ prefix - means not completed, + means completed. no marking means it's a comment
 
 - re-do the add clothing screen
 
-- add logout button on profile (settings) page
++ add logout button on profile (settings) page
 
 - add privacy policy/terms of service
 
 - make delete account button functional
 
-- fix any miscellaneous .css issues/ugliness around the website
+- fix any miscellaneous .css issues/mistakes around the website
 
 + fix back button on reset password page
 
 - add login via username OR email, rather than just email
 
-- fix resend verification timer
+- fix resend verification email timer
 
 - make change password feature in settings
-
-- center profile picture update status
