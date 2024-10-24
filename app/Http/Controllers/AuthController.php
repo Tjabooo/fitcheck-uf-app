@@ -128,7 +128,7 @@ class AuthController extends Controller
             // Store email in session for possible resend
             session(['email' => $user->email]);
 
-            return redirect()->route('registration.confirmation');
+            return redirect()->to('logga-in')->with('status', 'Du har fått ett mejl med verifieringslänk! Klicka på länken för att kunna logga in.');
         } catch (\Exception $e) {
             DB::rollback();
             return back()->withErrors(['registration_error' => $e->getMessage()]);
@@ -144,8 +144,8 @@ class AuthController extends Controller
             ->send(new VerificationMail($verificationLink));
     }
 
-    // Show registration confirmation page
-    public function showConfirmationPage()
+    // Show registration confirmation message
+    public function showConfirmationMessage()
     {
         $email = session('email');
         if (!$email) {
@@ -160,17 +160,11 @@ class AuthController extends Controller
 
         $tokenData = EmailVerificationToken::where('user_id', $user->id)->first();
 
-        $canResend = true;
-        $remainingTime = 0;
-
-        if ($tokenData && Carbon::now()->diffInSeconds($tokenData->last_sent) < 60) {
-            $canResend = false;
-            $remainingTime = 60 - Carbon::now()->diffInSeconds($tokenData->last_sent);
+        if (!$tokenData) {
+            return redirect()->route('register');
         }
 
-        return view('auth.registration_confirmation', [
-            'can_resend' => $canResend,
-            'remaining_time' => $remainingTime,
+        return view('auth.register', [
             'email_err' => session('email_err'),
             'message' => session('message'),
         ]);
@@ -207,59 +201,4 @@ class AuthController extends Controller
 
         return view('auth.emails.verify_email', ['verified' => true]);
     }
-
-    public function resendVerificationEmail(Request $request)
-    {
-        $email = session('email');
-
-        // Check if email exists in the session and is valid
-        if (!$email) {
-            return redirect()->route('register');
-        }
-
-        $user = User::where('email', $email)->first();
-
-        // If the user is already verified, no need to resend
-        if (!$user || $user->verified) {
-            return redirect()->route('login');
-        }
-
-        // Check if a token already exists for the user
-        $tokenData = EmailVerificationToken::where('user_id', $user->id)->first();
-
-        // Enforce rate limit (60 seconds between resend attempts)
-        if ($tokenData && Carbon::now()->diffInSeconds($tokenData->last_sent) < 60) {
-            $remainingTime = 60 - Carbon::now()->diffInSeconds($tokenData->last_sent);
-
-            // Return with remaining time to prevent resending too soon
-            return back()->withErrors([
-                'resend_limit' => "Var snäll och vänta $remainingTime sekunder innan du försöker igen.",
-            ])->with([
-                'remaining_time' => $remainingTime,  // Pass this to the frontend
-            ]);
-        }
-
-        // If allowed, generate a new token and update last sent time
-        $token = bin2hex(random_bytes(32));
-
-        // Delete old token and create a new one
-        if ($tokenData) {
-            $tokenData->delete();
-        }
-
-        EmailVerificationToken::create([
-            'user_id' => $user->id,
-            'token' => $token,
-            'expires' => Carbon::now()->addDay(),
-            'last_sent' => Carbon::now(),
-        ]);
-
-        // Send the verification email
-        $this->sendVerificationEmail($user->email, $token);
-
-        // Return success message and reset the countdown timer
-        return back()->with('message', 'Ett nytt verifieringsmail har skickats till din e-post.')
-                     ->with(['remaining_time' => 60]);  // Reset timer to 60 seconds
-    }
-
 }

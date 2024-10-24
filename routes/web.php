@@ -44,12 +44,11 @@ Route::post('/logga-ut', [AuthController::class, 'logout'])->middleware('auth')-
 // Registration Routes
 Route::get('/registrera', [AuthController::class, 'showRegistrationForm'])->middleware('guest')->name('register.index');
 Route::post('/registrera', [AuthController::class, 'register'])->middleware('guest')->name('register');
-Route::get('/registrera/bekräftelse', [AuthController::class, 'showConfirmationPage'])->name('registration.confirmation');
+Route::get('/registrera/bekräftelse', [AuthController::class, 'showConfirmationMessage'])->name('registration.confirmation');
 
 // Email Verification Routes
 Route::get('/epost/verifiera', [AuthController::class, 'showVerificationNotice'])->name('auth.verify.notice');
 Route::get('/epost/verifiera/{token}', [AuthController::class, 'verifyEmail'])->name('auth.verify');
-Route::post('/epost/skicka-igen', [AuthController::class, 'resendVerificationEmail'])->name('auth.verify.resend');
 
 // Password Reset Routes
 Route::get('/lösenord/återställ', [PasswordResetController::class, 'showRequestForm'])->middleware('guest')->name('password.request');

@@ -36,6 +36,12 @@
             <button class="main-button-design" type="submit">Registrera</button>
         </div>
 
+        @if (session('status'))
+            <div class="success-message">
+                {{ session('status') }}
+            </div>
+        @endif
+
         @if ($errors->has('registration_error'))
         <div class="error-message">
             {{ $errors->first('registration_error') }}
