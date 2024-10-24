@@ -22,7 +22,9 @@ prefix - means not completed, + means completed. no marking means it's a comment
 this one isn't really fixed, i just removed the feature lol
 + fix resend verification email timer
 
-- make change password feature in settings
+- add change password option to settings page
+
+- add change email option to settings page
 
 + make login data save in cookies (no need to login every time u visit the site)
 
