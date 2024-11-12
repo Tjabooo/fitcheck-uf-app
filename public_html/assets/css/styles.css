@@ -466,12 +466,14 @@ nav a span {
 
 #upload-error.error-message {
     margin-right: auto;
+    margin-left: auto;
     margin-top: 0;
     margin-bottom: 0;
 }
 
 #upload-status.success-message {
     margin-right: auto;
+    margin-left: auto;
     margin-top: 0;
     margin-bottom: 0;
 }
