@@ -666,6 +666,7 @@ form {
     font-size: 24px;
     border: none;
     cursor: pointer;
+    color: #000;
 }
 
 #cameraView {
@@ -675,6 +676,8 @@ form {
 }
 
 #snapButton {
+    width: 22vw;
+    height: 6vh;
     margin-top: -2vh;
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -682,6 +685,7 @@ form {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .instructions {
