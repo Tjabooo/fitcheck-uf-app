@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\ResetPasswordMail;
 
-class PasswordResetController extends Controller
+class PasswordResetController
 {
     // Show request form
     public function showRequestForm()

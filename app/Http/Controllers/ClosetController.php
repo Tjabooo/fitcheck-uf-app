@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class ClosetController extends Controller
+class ClosetController
 {
     use AuthorizesRequests;
 

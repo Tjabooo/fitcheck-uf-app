@@ -5,9 +5,9 @@
 @section('content')
 @include('partials.nav')
 <section class="screen closet-screen">
-    <div class="add-new-clothes-container">
+    <div class="add-new-clothes-container" onclick="openCameraModal()">
         <img id="add-new-clothes" src="{{ asset('assets/icons/add-icon.png') }}" alt="Add Icon">
-            <span>Lägg till klädesplagg</span>
+        <span>Lägg till klädesplagg</span>
     </div>
     <h2 class="closet-title">Din garderob</h2>
     <div class="grid-container">
@@ -29,6 +29,9 @@
             <p>Du har inga kläder i din garderob</p>
         @endisset
     </div>
-    </div>
 </section>
+
+<!-- Include Camera Modal -->
+@include('closet.add-clothing')
+
 @endsection

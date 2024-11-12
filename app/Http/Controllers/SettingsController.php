@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-class SettingsController extends Controller
+class SettingsController
 {
     // Display profile settings
     public function index()

@@ -58,3 +58,41 @@ applyButton.addEventListener('click', () => {
             });
     }
 });
+
+
+// Open the camera modal
+function openCameraModal() {
+    document.getElementById('cameraModal').style.display = 'block';
+    startCamera();
+}
+
+// Close the camera modal
+function closeCameraModal() {
+    document.getElementById('cameraModal').style.display = 'none';
+    stopCamera();
+}
+
+// Start the camera
+function startCamera() {
+    const video = document.getElementById('cameraView');
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => console.error("Camera error:", error));
+    } else {
+        alert("Camera not supported on this device");
+    }
+}
+
+// Stop the camera
+function stopCamera() {
+    const video = document.getElementById('cameraView');
+    const stream = video.srcObject;
+    if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        video.srcObject = null;
+    }
+}

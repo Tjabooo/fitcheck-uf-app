@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ClosetController;
@@ -66,8 +67,6 @@ Route::get('/ogiltig-token', function () {
 Route::get('/skrivbord', function () {
     return view('auth.errors.desktop');
 })->name('errors.desktop');
-
-
 
 // Protected Routes
 Route::middleware('auth')->group(function () {
