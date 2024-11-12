@@ -665,6 +665,7 @@ form {
     font-size: 24px;
     border: none;
     cursor: pointer;
+    color: #000;
 }
 
 #cameraView {
