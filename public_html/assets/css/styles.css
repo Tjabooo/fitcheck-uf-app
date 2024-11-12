@@ -5,7 +5,8 @@
     font-family: 'Outfit', sans-serif;
 }
 
-html, body {
+html,
+body {
     font-family: 'Outfit', sans-serif;
     display: flex;
     flex-direction: column;
@@ -334,7 +335,20 @@ nav a span {
     font-size: 16px;
     border: 1.5px solid #ccc;
     border-radius: 5px;
+    display: inline-;
 }
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    float: left;
+}
+
+.check-label {
+    background-color: red !important;
+    width: 300px;
+}
+
 
 .auth-container .form-group.has-error input {
     border-color: #e74c3c;
@@ -380,7 +394,9 @@ nav a span {
 }
 
 @media (max-width: 600px) {
-    header, .header-center {
+
+    header,
+    .header-center {
         padding: 5px;
     }
 
@@ -402,7 +418,8 @@ nav a span {
     height: 32px;
 }
 
-.error-message, .success-message {
+.error-message,
+.success-message {
     max-width: 600px;
     margin-top: 0px;
     margin-bottom: 5px;
