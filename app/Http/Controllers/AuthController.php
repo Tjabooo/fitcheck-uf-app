@@ -128,7 +128,7 @@ class AuthController extends Controller
             // Store email in session for possible resend
             session(['email' => $user->email]);
 
-            return redirect()->to('logga-in')->with('status', 'Du har fått ett mejl med verifieringslänk! Klicka på länken för att kunna logga in.');
+            return redirect()->to('logga-in')->with('status', 'Du har fått ett mejl med verifieringslänk! Klicka på länken för att logga in.');
         } catch (\Exception $e) {
             DB::rollback();
             return back()->withErrors(['registration_error' => $e->getMessage()]);
