@@ -29,3 +29,5 @@ this one isn't really fixed, i just removed the feature lol
 + make login data save in cookies (no need to login every time u visit the site)
 
 - disable direct traversal to image assets
+
+- add resend verification email on login screen (in case the original link has expired)

@@ -76,7 +76,13 @@ function closeCameraModal() {
 function startCamera() {
     const video = document.getElementById('cameraView');
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+        navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: "environment",
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            }
+        })
             .then(stream => {
                 video.srcObject = stream;
             })
