@@ -649,6 +649,7 @@ form {
     position: relative;
     background-color: #fff;
     padding: 20px;
+    padding-top: 0 !important;
     width: 100%;
     max-width: 600px;
     height: 100%;
