@@ -345,7 +345,7 @@ nav a span {
 }
 
 .check-label {
-    background-color: red !important;
+    background-color: red;
     width: 300px;
 }
 
