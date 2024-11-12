@@ -665,11 +665,10 @@ form {
     font-size: 24px;
     border: none;
     cursor: pointer;
-    color: #000;
 }
 
 #cameraView {
-    width: 100%;
+    width: 50vh;
     height: auto;
     flex-grow: 1;
 }
