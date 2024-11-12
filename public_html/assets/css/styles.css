@@ -660,8 +660,8 @@ form {
 
 .exit-button {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 2vh;
+    left: 4vw;
     background: none;
     font-size: 24px;
     border: none;
