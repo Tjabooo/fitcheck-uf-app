@@ -12,9 +12,9 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="form-group @error('email') has-error @enderror">
-                <input type="email" name="email" placeholder="E-post" value="{{ old('email') }}" required>
-                @error('email')
+            <div class="form-group @error('identifier') has-error @enderror">
+                <input type="text" name="identifier" placeholder="E-post eller användarnamn" value="{{ old('identifier') }}" required>
+                @error('identifier')
                     <span class="help-block">{{ $message }}</span>
                 @enderror
             </div>

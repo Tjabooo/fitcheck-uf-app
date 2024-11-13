@@ -26,20 +26,22 @@ class AuthController
     {
         // Validate email and password
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'identifier' => 'required|string',
             'password' => 'required',
         ]);
 
         $remember = $request->has('remember');
 
+        $loginField = filter_var($credentials['identifier'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
         // Attempt login
-        if (Auth::attempt($credentials, $remember)) {
+        if (Auth::attempt([$loginField => $credentials['identifier'], 'password' => $credentials['password']], $remember)) {
             $user = Auth::user();
 
             // Check if the user is verified
             if (!$user->verified) {
                 Auth::logout();
-                return back()->withErrors(['email' => 'Vänligen verifiera din e-post innan du loggar in.']);
+                return back()->withErrors(['identifier' => 'Vänligen verifiera din e-post innan du loggar in.']);
             }
 
             $request->session()->regenerate();
@@ -48,7 +50,7 @@ class AuthController
         }
 
         return back()->withErrors([
-            'email' => 'Uppgifterna du angav matchade inte ett konto i vårt system.',
+            'identifier' => 'Uppgifterna du angav matchade inte ett konto i vårt system.',
         ]);
     }
 

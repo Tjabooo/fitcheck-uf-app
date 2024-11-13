@@ -88,7 +88,7 @@ function startCamera() {
             })
             .catch(error => console.error("Camera error:", error));
     } else {
-        alert("Camera not supported on this device");
+        alert("Den här enheten har inte stöd för kamera.");
     }
 }
 
