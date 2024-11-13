@@ -339,23 +339,18 @@ nav a span {
 }
 
 .checkbox-group label {
-    display: inline-flex;
-    position: relative;
+    display: flex;
     align-items: center;
-    float: left;
-    gap: 5px;
 }
 
 .check {
-    flex: 0 0 auto;
     margin: 0;
 }
 
 .check-label {
-    white-space: nowrap;
-    display: inline-block;
+    background-color: red;
     margin-left: 5px;
-    flex: 0 0 auto;
+    white-space: nowrap;
 }
 
 .auth-container .form-group.has-error input {
