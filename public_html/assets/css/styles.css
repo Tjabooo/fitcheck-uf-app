@@ -343,7 +343,6 @@ nav a span {
     position: relative;
     align-items: center;
     float: left;
-    margin-left: -43px;
 }
 
 .checkbox-group .check {
@@ -352,7 +351,6 @@ nav a span {
 
 .check-label {
     width: 200px;
-    margin-left: -35px;
 }
 
 
