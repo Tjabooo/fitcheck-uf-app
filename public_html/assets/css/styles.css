@@ -347,13 +347,15 @@ nav a span {
 }
 
 .check {
-    margin-right: 0;
+    flex: 0 0 auto;
+    margin: 0;
 }
 
 .check-label {
-    background-color: red;
     white-space: nowrap;
     display: inline-block;
+    margin-left: 5px;
+    flex: 0 0 auto;
 }
 
 .auth-container .form-group.has-error input {
