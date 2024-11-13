@@ -345,16 +345,15 @@ nav a span {
     float: left;
 }
 
-.checkbox-group .check {
+.check {
     margin-right: 5px;
 }
 
 .check-label {
     background-color: red;
-    margin-left: 0;
-    width: 50vw;
+    left: 0;
+    width: 200px;
 }
-
 
 .auth-container .form-group.has-error input {
     border-color: #e74c3c;
