@@ -340,13 +340,19 @@ nav a span {
 
 .checkbox-group label {
     display: flex;
+    position: relative;
     align-items: center;
     float: left;
+    margin-left: -43px;
+}
+
+.checkbox-group .check {
+    margin-right: 5px;
 }
 
 .check-label {
-    background-color: red;
-    width: 300px;
+    width: 200px;
+    margin-left: -35px;
 }
 
 
