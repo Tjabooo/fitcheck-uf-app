@@ -697,6 +697,7 @@ form {
 .check-label {
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
     white-space: nowrap;
 }
 
