@@ -338,21 +338,6 @@ nav a span {
     display: inline-;
 }
 
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-}
-
-.check {
-    margin: 0;
-}
-
-.check-label {
-    background-color: red;
-    margin-left: 5px;
-    white-space: nowrap;
-}
-
 .auth-container .form-group.has-error input {
     border-color: #e74c3c;
 }
@@ -702,4 +687,24 @@ form {
 
 .instructions li {
     margin: 5px 0;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+}
+
+.check {
+    margin-right: 5px;
+}
+
+.check-label {
+    font-size: 14px;
+    display: inline-block;
+    white-space: nowrap;
 }
