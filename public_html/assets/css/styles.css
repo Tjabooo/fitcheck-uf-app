@@ -694,16 +694,12 @@ form {
     align-items: center;
 }
 
-.checkbox-group label {
+.check-label {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    white-space: nowrap;
 }
 
 .check {
-    margin-right: 5px;
-}
-
-.check-label {
-    display: inline-block;
-    white-space: nowrap;
+    margin-right: 8px; /* Adjust space between checkbox and label text */
 }

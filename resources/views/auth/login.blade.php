@@ -25,9 +25,9 @@
                 @enderror
             </div>
             <div class="form-group checkbox-group">
-                <label>
+                <label for="remember" class="check-label">
                     <input class="check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <span class="check-label">Kom ihåg mig</span>
+                    Kom ihåg mig
                 </label>
             </div>
             <div class="form-group">
