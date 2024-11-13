@@ -699,9 +699,9 @@ form {
     align-items: center;
     flex-wrap: nowrap;
     white-space: nowrap;
-    width: 10px;
+    width: 10px; /* FOR SOME FUCKING REASON THIS IS NEEDED FOR THE CHECKBOX LABEL TO BE CORRECTLY ALIGNED ON **MOBILE**???? */
 }
 
 .check {
-    margin-right: 8px; /* Adjust space between checkbox and label text */
+    margin-right: 8px;
 }
