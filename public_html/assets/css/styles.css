@@ -705,11 +705,3 @@ form {
 .check {
     margin-right: 8px;
 }
-
-
-/* for testing purposes */
-@media (min-width: 450px) {
-    .check-label {
-        width: 200px;;
-    }
-}
