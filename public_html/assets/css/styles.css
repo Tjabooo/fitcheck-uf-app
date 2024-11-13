@@ -697,6 +697,7 @@ form {
 .checkbox-group label {
     display: flex;
     align-items: center;
+    line-height: normal;
 }
 
 .check {
@@ -704,7 +705,8 @@ form {
 }
 
 .check-label {
-    font-size: 14px;
     display: inline-block;
     white-space: nowrap;
+    line-height: 1;
+    margin-top: 1px;
 }
