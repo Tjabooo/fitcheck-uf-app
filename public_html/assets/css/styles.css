@@ -353,6 +353,7 @@ nav a span {
     background-color: red;
     left: 0;
     width: 200px;
+    white-space: nowrap;
 }
 
 .auth-container .form-group.has-error input {

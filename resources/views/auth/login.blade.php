@@ -27,7 +27,7 @@
             <div class="form-group checkbox-group">
                 <label>
                     <input class="check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <p class="check-label">Kom ihåg mig</p>
+                    <span class="check-label">Kom ihåg mig</span>
                 </label>
             </div>
             <div class="form-group">
