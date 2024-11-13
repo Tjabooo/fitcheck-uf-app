@@ -350,9 +350,6 @@ nav a span {
 }
 
 .check-label {
-    background-color: red;
-    left: 0;
-    width: 200px;
     white-space: nowrap;
 }
 
