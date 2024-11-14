@@ -703,5 +703,9 @@ form {
 }
 
 .check {
-    margin-right: 8px;
+    margin-right: 8px;   
+}
+
+.empty-closet-text {
+    text-align: center;
 }

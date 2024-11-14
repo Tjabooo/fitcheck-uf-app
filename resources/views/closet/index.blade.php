@@ -23,10 +23,10 @@
                     </form>
                 </div>
             @empty
-                <p>Du har inga kläder i din garderob</p>
+                <p class="empty-closet-text">Du har inga kläder i din garderob</p>
             @endforelse
         @else
-            <p>Du har inga kläder i din garderob</p>
+            <p class="empty-closet-text">Du har inga kläder i din garderob</p>
         @endisset
     </div>
 </section>
