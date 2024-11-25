@@ -50,7 +50,7 @@ class AuthController
         }
 
         return back()->withErrors([
-            'identifier' => 'Uppgifterna du angav matchade inte ett konto i vårt system.',
+            'identifier' => 'Fel användarnamn, e-post eller lösenord.',
         ]);
     }
 
